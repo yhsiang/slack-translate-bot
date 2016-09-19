@@ -12,6 +12,7 @@ const app = new Koa();
 const router = new Route();
 
 function postBack(text) {
+  console.log(text)
   const payload = {
     channel: "#general-en",
     username: "TranslateBot",
@@ -32,6 +33,7 @@ router
   })
   .post('/webhook', ctx => {
     if (ctx.request.fields) {
+      console.log(ctx.request.fields)
       const { token, text, user_name } = ctx.request.fields;
       if (token !== TOKEN) return;
       if (text.match(/[\u4e00-\u9fa5]/)) {
@@ -49,7 +51,7 @@ router
         .then(response => {
           const { text } = JSON.parse(response);
           const [ translated ] = text;
-          postBack(translated);
+          postBack(`${user_name} < translated`);
         })
         .catch(console.log);
       }
