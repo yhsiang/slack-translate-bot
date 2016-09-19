@@ -51,7 +51,7 @@ router
         .then(response => {
           const { text } = JSON.parse(response);
           const [ translated ] = text;
-          postBack(`${user_name} < translated`);
+          postBack(`${user_name} < ${translated}`);
         })
         .catch(console.log);
       }
