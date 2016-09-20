@@ -36,7 +36,7 @@ router
       console.log(ctx.request.fields)
       const { token, text, user_name } = ctx.request.fields;
       if (token !== TOKEN) return;
-      if (text.match(/[\u4e00-\u9fa5]/)) {
+      if (text.match(/[\u4e00-\u9fa5]/) && !user_name.match(/slackbot/)) {
         request({
           method: 'POST',
           uri: 'https://translate.yandex.net/api/v1.5/tr.json/translate',
